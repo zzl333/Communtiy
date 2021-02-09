@@ -10,12 +10,24 @@ public class PageUtilsController {
     public String getTop() {
         return "/top";
     }
+
     @RequestMapping("/carousel")
     public String getCarousel() {
         return "/carousel";
     }
+
     @RequestMapping("/activity")
     public String getActivity() {
         return "/activity";
+    }
+
+    @RequestMapping("/foot")
+    public String getFoot() {
+        return "/foot";
+    }
+
+    @RequestMapping("/login")
+    public String getLogin() {
+        return "/login";
     }
 }
