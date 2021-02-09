@@ -1,0 +1,26 @@
+<ul class="layui-nav" id="top" xmlns:th="http://www.thymeleaf.org">
+    <li class="layui-nav-item layui-this">
+        <a href="">主页</span></a>
+    </li>
+    <li class="layui-nav-item">
+        <a href="">活动中心</span></a>
+    </li>
+    <ul class="layui-nav layui-layout-right">
+        <li class="layui-nav-item" aria-level="rigth" th:if="${user}">
+            <a href=""><img src="${user.headerImg}" class="layui-nav-img">[[${user.name}]]</a>
+            <dl class="layui-nav-child">
+                <dd><a href="javascript:;">个人信息</a></dd>
+                <dd><a href="javascript:;">我的活动</a></dd>
+                <dd><a href="javascript:;">退出登录</a></dd>
+            </dl>
+        </li>
+        <li class="layui-nav-item" aria-level="rigth" th:if="!${user}">
+            <a href="">登录/注册</a>
+        </li>
+    </ul>
+</ul>
+<script>
+    layui.use('element', function(){
+        var element = layui.element;
+    });
+</script>
