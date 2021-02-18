@@ -157,7 +157,7 @@
 <div class="wrap">
     <img src="/images/loginbackground.jpg" class="imgStyle">
     <div class="loginForm">
-        <form>
+        <form action="/user/login" id="login" >
             <div class="logoHead">
                 <!--<h2 style="margin-top: 15px">房产销售平台管理系统</h2>-->
             </div>
@@ -271,22 +271,22 @@
         }else {
             var loginUsername = $('#loginUsername').val();
             var loginPassword = $('#loginPassword').val();
-            var params = {};
-            params.loginUsername = loginUsername;
-            params.loginPassword = loginPassword;
+            var user = {};
+            user.code = loginUsername;
+            user.passwrod = loginPassword;
             var loginLoadIndex = layer.load(2);
             $('#loginBtn').val("正在登录...");
             $.ajax({
                 type:'post',
-                url:window.location.protocol+'//'+window.location.host+'/security-web/login.do',
+                url:window.location.protocol+'//'+window.location.host+'/user/login',
                 dataType:'html',
-                data:JSON.stringify(params),
+                data:JSON.stringify(user),
                 contentType:'application/json',
                 success:function (data) {
                     layer.close(loginLoadIndex);
                     var jsonData = JSON.parse(data);
-                    if (jsonData.code == '999'){
-                        window.location.href = './static/templates/main.html';
+                    if (jsonData.code == '202'){
+                        window.location.href = '/index';
                     }
                 },
                 error:function () {
