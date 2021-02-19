@@ -6,15 +6,16 @@
         <a href="">活动中心</span></a>
     </li>
     <ul class="layui-nav layui-layout-right">
-        <li class="layui-nav-item" aria-level="rigth" th:if="${user}">
-            <a href=""><img src="${user.headerImg}" class="layui-nav-img">[[${user.name}]]</a>
+        <li class="layui-nav-item" aria-level="rigth" th:if="${user!=null}">
+            <a href=""><img src="#" class="layui-nav-img">[[${user.name}]]</a>
+            <h1>[[${user.name}]]</h1>
             <dl class="layui-nav-child">
                 <dd><a href="javascript:;">个人信息</a></dd>
                 <dd><a href="javascript:;">我的活动</a></dd>
                 <dd><a href="javascript:;">退出登录</a></dd>
             </dl>
         </li>
-        <li class="layui-nav-item" aria-level="rigth" th:if="!${user}">
+        <li class="layui-nav-item" aria-level="rigth" th:if="${user==null}">
             <a href="/page/login">登录/注册</a>
         </li>
     </ul>

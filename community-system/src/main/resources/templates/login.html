@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>登录</title>
@@ -157,17 +157,18 @@
 <div class="wrap">
     <img src="/images/loginbackground.jpg" class="imgStyle">
     <div class="loginForm">
-        <form action="/user/login" id="login" >
-            <div class="logoHead">
-                <!--<h2 style="margin-top: 15px">房产销售平台管理系统</h2>-->
+        <form action="/user/login" id="login" method="post">
+            <div class="logoHead" style="text-align: center">
+                <h2 style="margin-top: 15px;">党员社区平台</h2>
             </div>
+            <p style="text-align: center;color: red" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></p>
             <div class="usernameWrapDiv">
                 <div class="usernameLabel">
                     <label>用户名:</label>
                 </div>
                 <div class="usernameDiv">
                     <i class="layui-icon layui-icon-username adminIcon"></i>
-                    <input id="loginUsername" class="layui-input adminInput" type="text" name="username" placeholder="输入用户名" >
+                    <input id="loginUsername" class="layui-input adminInput" type="text" name="id" placeholder="输入用户名" >
                 </div>
             </div>
             <div class="usernameWrapDiv">
@@ -266,34 +267,36 @@
     }
     // 登录流程
     function login() {
-        if (!validateCode('#loginCard','#loginCode')){
-            //阻断提示
+        // if (!validateCode('#loginCard','#loginCode')){
+        //     //阻断提示
+        if(0){
         }else {
-            var loginUsername = $('#loginUsername').val();
-            var loginPassword = $('#loginPassword').val();
-            var user = {};
-            user.code = loginUsername;
-            user.passwrod = loginPassword;
-            var loginLoadIndex = layer.load(2);
-            $('#loginBtn').val("正在登录...");
-            $.ajax({
-                type:'post',
-                url:window.location.protocol+'//'+window.location.host+'/user/login',
-                dataType:'html',
-                data:JSON.stringify(user),
-                contentType:'application/json',
-                success:function (data) {
-                    layer.close(loginLoadIndex);
-                    var jsonData = JSON.parse(data);
-                    if (jsonData.code == '202'){
-                        window.location.href = '/index';
-                    }
-                },
-                error:function () {
-                    layer.close(loginLoadIndex);
-                    $('#loginBtn').val("登录");
-                }
-            });
+            $('#login').submit();
+            // var loginUsername = $('#loginUsername').val();
+            // var loginPassword = $('#loginPassword').val();
+            // var user = {};
+            // user.code = loginUsername;
+            // user.passwrod = loginPassword;
+            // var loginLoadIndex = layer.load(2);
+            // $('#loginBtn').val("正在登录...");
+            // $.ajax({
+            //     type:'post',
+            //     url:window.location.protocol+'//'+window.location.host+'/user/login',
+            //     dataType:'html',
+            //     data:JSON.stringify(user),
+            //     contentType:'application/json',
+            //     success:function (data) {
+            //         layer.close(loginLoadIndex);
+            //         var jsonData = JSON.parse(data);
+            //         if (jsonData.code == '202'){
+            //             window.location.href = '/index';
+            //         }
+            //     },
+            //     error:function () {
+            //         layer.close(loginLoadIndex);
+            //         $('#loginBtn').val("登录");
+            //     }
+            // });
         }
 
     }

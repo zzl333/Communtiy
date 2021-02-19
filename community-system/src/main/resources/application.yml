@@ -26,7 +26,7 @@ spring:
       enabled: true
 mybatis:
   #配置mapper.xml所在的路径
-  mapper-locations: classpath:mapper/*Mapper.xml
+  mapper-locations: classpath:mapper/*.xml,classpath:mapper/generator/*.xml
   #配置映射类所在的包名
   type-aliases-package: com.lixiangshequ.entity
 

@@ -8,17 +8,16 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserServiceImpl extends BaseService implements UserService {
+
+    @Autowired
+    UserMapper userMapper;
+
     @Override
     public User login(User user) {
-        return null;
+        User userRes = (User) userMapper.selectByPrimaryKey(user.getId());
+        if(userRes == null || !user.getPassword().equals(userRes.getPassword())) {
+            return null;
+        }
+        return userRes;
     }
-
-//    @Autowired
-//    UserMapper userMapper;
-
-//    @Override
-//    public User login(User user) {
-////        User user1 = (User);
-////        return userMapper.selectByPrimaryKey(user.getId()) != null
-//    }
 }
