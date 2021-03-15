@@ -1,7 +1,7 @@
 package com.lixiangshequ.service;
 
-import com.lixiangshequ.entity.generator.UserGen;
+import com.lixiangshequ.entity.base.BaseUser;
 
 public interface UserService {
-    UserGen login(UserGen user);
+    BaseUser login(BaseUser user);
 }

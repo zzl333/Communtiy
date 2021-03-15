@@ -1,6 +1,12 @@
 package com.lixiangshequ.repository;
 
-import com.lixiangshequ.repository.generator.UserGenMapper;
+import com.lixiangshequ.entity.base.BaseUser;
+import com.lixiangshequ.repository.base.BaseUserMapper;
 
-public interface UserMapper extends UserGenMapper {
+public interface UserMapper extends BaseUserMapper {
+
+    /**
+     * 通过code查询用户
+     */
+    BaseUser selectByCode(String code);
 }

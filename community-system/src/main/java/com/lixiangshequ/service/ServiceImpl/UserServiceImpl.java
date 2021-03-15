@@ -1,5 +1,6 @@
 package com.lixiangshequ.service.ServiceImpl;
 
+import com.lixiangshequ.entity.base.BaseUser;
 import com.lixiangshequ.repository.UserMapper;
 import com.lixiangshequ.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,11 +13,11 @@ public class UserServiceImpl extends BaseService implements UserService {
     UserMapper userMapper;
 
     @Override
-    public User login(User user) {
-        User userRes = (User) userMapper.selectByPrimaryKey(user.getId());
-        if(userRes == null || !user.getPassword().equals(userRes.getPassword())) {
+    public BaseUser login(BaseUser user) {
+        BaseUser res = userMapper.selectByCode(user.getCode());
+        if(user == null || !user.getPassword().equals(user.getPassword())) {
             return null;
         }
-        return userRes;
+        return res;
     }
 }

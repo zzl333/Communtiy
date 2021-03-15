@@ -9,7 +9,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/page")
-public class PageUtilsController {
+public class PageUtilsController extends BaseController{
     @RequestMapping("/top")
     public String getTop() {
         return "/top";
