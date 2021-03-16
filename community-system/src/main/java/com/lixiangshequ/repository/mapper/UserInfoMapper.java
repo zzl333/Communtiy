@@ -5,4 +5,5 @@ import com.lixiangshequ.repository.base.BaseUserInfoMapper;
 
 public interface UserInfoMapper extends BaseUserInfoMapper {
 
+    BaseUserInfo selectByUid(Integer uid);
 }

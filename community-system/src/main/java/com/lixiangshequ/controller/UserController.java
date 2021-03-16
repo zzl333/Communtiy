@@ -1,13 +1,14 @@
 package com.lixiangshequ.controller;
 
+import com.lixiangshequ.config.ResposeMessage;
 import com.lixiangshequ.entity.base.BaseUser;
+import com.lixiangshequ.entity.base.BaseUserInfo;
 import com.lixiangshequ.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.logging.Logger;
 
 @Controller
 @RequestMapping("/user")
@@ -19,19 +20,14 @@ public class UserController extends BaseController{
     @RequestMapping("/login")
     public String login(BaseUser user, HttpServletRequest request){
         logger.info("/user/login:" + user.getCode());
-        if(user.getCode() == null || user.getPassword() == null){
-            request.setAttribute("msg", "账号或者密码为空!");
-            return "/login";
-        }
-        user = userService.login(user);
-        if(user == null) {
-            request.setAttribute("msg", "账号或密码错误!");
-            return "/login";
-        }
+        ResposeMessage<BaseUserInfo> res = userService.login(user);
         //放入Session
-        request.getSession().setAttribute("user", user);
-        user.setPassword(null);
-        request.setAttribute("user", user);
-        return "/index";
+        if (res.getData() != null) {
+            request.getSession().setAttribute("user", res.getData());
+            request.setAttribute("user", res.getData());
+        }else {
+            request.setAttribute("msg", res.getMsg());
+        }
+        return res.getUrl();
     }
 }

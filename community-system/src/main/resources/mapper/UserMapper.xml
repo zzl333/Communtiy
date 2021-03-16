@@ -7,7 +7,7 @@
     select
     <include refid="Base_Column_List" />
     from user
-    where id = #{code,jdbcType=VARCHAR}
+    where code = #{code,jdbcType=VARCHAR}
   </select>
 
 </mapper>
