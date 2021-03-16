@@ -19,7 +19,7 @@ public class UserController extends BaseController{
     @RequestMapping("/login")
     public String login(BaseUser user, HttpServletRequest request){
         logger.info("/user/login:" + user.getCode());
-        if(user.getId() == null || user.getPassword() == null){
+        if(user.getCode() == null || user.getPassword() == null){
             request.setAttribute("msg", "账号或者密码为空!");
             return "/login";
         }

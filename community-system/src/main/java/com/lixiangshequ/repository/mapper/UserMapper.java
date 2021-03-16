@@ -1,4 +1,4 @@
-package com.lixiangshequ.repository;
+package com.lixiangshequ.repository.mapper;
 
 import com.lixiangshequ.entity.base.BaseUser;
 import com.lixiangshequ.repository.base.BaseUserMapper;

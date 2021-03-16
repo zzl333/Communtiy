@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
 @EnableTransactionManagement
-@MapperScan("com.lixiangshequ.repository")
+@MapperScan("com.lixiangshequ.repository.mapper")
 public class AppRun {
 
     public static void main(String[] args) {
