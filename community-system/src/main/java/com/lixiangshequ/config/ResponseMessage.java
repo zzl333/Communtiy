@@ -1,20 +1,20 @@
 package com.lixiangshequ.config;
 
-public class ResposeMessage<T> {
+public class ResponseMessage<T> {
     private String msg;
     private T data;
     private String url;
 
-    public ResposeMessage() {
+    public ResponseMessage() {
     }
 
-    public ResposeMessage(String msg, T data, String url) {
+    public ResponseMessage(String msg, T data, String url) {
         this.msg = msg;
         this.data = data;
         this.url = url;
     }
 
-    public ResposeMessage(String msg, T data) {
+    public ResponseMessage(String msg, T data) {
         this.msg = msg;
         this.data = data;
     }

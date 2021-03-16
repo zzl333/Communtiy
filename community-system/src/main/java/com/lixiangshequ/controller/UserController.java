@@ -1,6 +1,6 @@
 package com.lixiangshequ.controller;
 
-import com.lixiangshequ.config.ResposeMessage;
+import com.lixiangshequ.config.ResponseMessage;
 import com.lixiangshequ.entity.base.BaseUser;
 import com.lixiangshequ.entity.base.BaseUserInfo;
 import com.lixiangshequ.service.UserService;
@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping("/user")
-public class UserController extends BaseController{
+public class UserController extends BaseController<BaseUser>{
 
     @Autowired
     UserService userService;
@@ -20,7 +20,7 @@ public class UserController extends BaseController{
     @RequestMapping("/login")
     public String login(BaseUser user, HttpServletRequest request){
         logger.info("/user/login:" + user.getCode());
-        ResposeMessage<BaseUserInfo> res = userService.login(user);
+        ResponseMessage<BaseUserInfo> res = userService.login(user);
         //放入Session
         if (res.getData() != null) {
             request.getSession().setAttribute("user", res.getData());

@@ -35,4 +35,9 @@ public class PageUtilsController extends BaseController{
         return "/login";
     }
 
+    @RequestMapping("/activityManager")
+    public String activityManager() {
+        return "/admin/activityManager";
+    }
+
 }

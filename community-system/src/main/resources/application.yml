@@ -29,6 +29,8 @@ mybatis:
   mapper-locations: classpath:mapper/*.xml,classpath:mapper/base/*.xml
   #配置映射类所在的包名
   type-aliases-package: com.lixiangshequ.entity.base
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 spring.output.ansi.enabled: always
 

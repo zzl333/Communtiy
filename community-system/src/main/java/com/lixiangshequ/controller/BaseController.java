@@ -6,6 +6,6 @@ import org.slf4j.LoggerFactory;
 /**
  * 控制层基类
  */
-public class BaseController {
+public class BaseController<T> {
     Logger logger = LoggerFactory.getLogger("Controller");
 }
