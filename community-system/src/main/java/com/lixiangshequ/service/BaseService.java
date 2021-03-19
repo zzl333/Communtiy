@@ -7,4 +7,5 @@ public class BaseService<T> {
     //log , session redis  mongo服务
 
     Logger logger = LoggerFactory.getLogger("Service");
+
 }

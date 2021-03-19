@@ -1,8 +1,8 @@
 package com.lixiangshequ.repository.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.lixiangshequ.entity.base.BaseUserActivity;
-import com.lixiangshequ.repository.base.BaseUserActivityMapper;
 
-public interface UserActivityMapper extends BaseUserActivityMapper {
+public interface UserActivityMapper extends BaseMapper<BaseUserActivity> {
 
 }

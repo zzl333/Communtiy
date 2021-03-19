@@ -11,12 +11,19 @@
     <modules>
         <module>community-system</module>
     </modules>
-    <properties>
-        <springboot.version>2.0.0.RELEASE</springboot.version>
-        <mybatis.version>1.1.1</mybatis.version>
-        <mysql.version>5.1.6</mysql.version>
+    <!--    <properties>-->
+    <!--        <springboot.version>2.2.0.RELEASE</springboot.version>-->
+    <!--        <mybatis.version>1.1.1</mybatis.version>-->
+    <!--        <mysql.version>5.1.6</mysql.version>-->
 
-    </properties>
+    <!--    </properties>-->
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.4.4</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
 
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->

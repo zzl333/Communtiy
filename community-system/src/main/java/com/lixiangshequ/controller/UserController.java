@@ -30,4 +30,6 @@ public class UserController extends BaseController<BaseUser>{
         }
         return res.getUrl();
     }
+
+
 }

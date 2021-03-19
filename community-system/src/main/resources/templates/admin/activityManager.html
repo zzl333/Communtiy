@@ -41,44 +41,44 @@
             , upload = layui.upload //上传
             , element = layui.element //元素操作l
 
-        //向世界问个好
-        layer.ready(function () {
-            layer.msg('加载成功');
-        });
-
-        //监听Tab切换
-        element.on('tab(demo)', function (data) {
-            layer.tips('切换了 ' + data.index + '：' + this.innerHTML, this, {
-                tips: 1
-            });
-        });
-
-        //执行一个 table 实例
-        table.render({
-            elem: '#demo'
-            , height: 600
-            , url: '/activity/find' //数据接口
-            , title: '用户表'
-            , page: true //开启分页
-            , toolbar: 'default' //开启工具栏，此处显示默认图标，可以自定义模板，详见文档
-            , totalRow: true //开启合计行
-            , cols: [
-                [ //表头
-                    {type: 'checkbox', fixed: 'left'}
-                    , {field: 'id', title: '活动ID', width: 80}
-                    , {field: 'titile', title: '活动标题', width: 80}
-                    , {field: 'info', title: '活动描述', width: 90}
-                    , {field: 'address', title: '活动地点', width: 80}
-                    , {field: 'createBy', title: '创建人', width: 80}
-                    , {field: 'organizer', title: '组织者', width: 150}
-                    , {field: 'created', title: '创建时间', width: 200,sort: true}
-                    , {field: 'type', title: '活动类型', width: 100,sort: true}
-                    , {field: 'beginTime', title: '开始时间', width: 135, sort: true}
-                    , {field: 'endTime', title: '结束时间', width: 135, sort: true}
-                    , {field: 'hot', title: '热度', width: 135, sort: true}
-                    , {fixed: 'right', width: 165, align: 'center', toolbar: '#barDemo'}
-                ]
-            ]
+        $.ajax({
+            type: "GET",
+            url: '/activity/find',
+            dataType: "json",
+            success: function (data) {
+                if (data && data.data) {
+                    var option = {
+                        elem: '#demo'
+                        , title: "活动表"
+                        , toolbar: 'default'
+                        , height: 530
+                        , title: '用户表'
+                        , page: true //开启分页
+                        , limit: 10
+                        , data: data.data
+                        , cols: [
+                            [ //表头
+                                {type: 'checkbox', fixed: 'left'}
+                                , {field: 'id', title: '活动ID', width: 80, sort: true}
+                                , {field: 'titile', title: '活动标题', width: 80}
+                                , {field: 'info', title: '活动描述', width: 90}
+                                , {field: 'address', title: '活动地点', width: 80}
+                                , {field: 'createBy', title: '创建人', width: 80}
+                                , {field: 'organizer', title: '组织者', width: 150}
+                                , {field: 'created', title: '创建时间', width: 200, sort: true}
+                                , {field: 'type', title: '活动类型', width: 100, sort: true}
+                                , {field: 'beginTime', title: '开始时间', width: 135, sort: true}
+                                , {field: 'endTime', title: '结束时间', width: 135, sort: true}
+                                , {field: 'hot', title: '热度', width: 135, sort: true}
+                                , {fixed: 'right', width: 165, align: 'center', toolbar: '#barDemo'}
+                            ]
+                        ]
+                    }
+                    table.render(option);
+                } else {
+                    layer.msg(data.msg);
+                }
+            }
         });
 
         //监听头工具栏事件
@@ -87,7 +87,7 @@
                 , data = checkStatus.data; //获取选中的数据
             switch (obj.event) {
                 case 'add':
-                    layer.msg('添加');
+                    addActivity();
                     break;
                 case 'update':
                     if (data.length === 0) {
@@ -126,6 +126,75 @@
             }
         });
     });
+
+    //添加活动
+    function addActivity() {
+        layer.open({
+            type: 1
+            , title: '添加活动'
+            , content: $('#dialog')
+        });
+    }
 </script>
 </body>
 </html>
+
+<!--添加活动弹窗-->
+<div id="dialog">
+    <form class="layui-form"> <!-- 提示：如果你不想用form，你可以换成div等任何一个普通元素 -->
+        <div class="layui-form-item">
+            <label class="layui-form-label">输入框</label>
+            <div class="layui-input-block">
+                <input type="text" name="" placeholder="请输入" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">下拉选择框</label>
+            <div class="layui-input-block">
+                <select name="interest" lay-filter="aihao">
+                    <option value="0">写作</option>
+                    <option value="1">阅读</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">复选框</label>
+            <div class="layui-input-block">
+                <input type="checkbox" name="like[write]" title="写作">
+                <input type="checkbox" name="like[read]" title="阅读">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">开关关</label>
+            <div class="layui-input-block">
+                <input type="checkbox" lay-skin="switch">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">开关开</label>
+            <div class="layui-input-block">
+                <input type="checkbox" checked lay-skin="switch">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">单选框</label>
+            <div class="layui-input-block">
+                <input type="radio" name="sex" value="0" title="男">
+                <input type="radio" name="sex" value="1" title="女" checked>
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">请填写描述</label>
+            <div class="layui-input-block">
+                <textarea placeholder="请输入内容" class="layui-textarea"></textarea>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit lay-filter="*">立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+    </form>
+
+</div>

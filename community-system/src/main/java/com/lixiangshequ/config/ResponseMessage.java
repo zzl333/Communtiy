@@ -1,6 +1,7 @@
 package com.lixiangshequ.config;
 
 public class ResponseMessage<T> {
+    private boolean success;
     private String msg;
     private T data;
     private String url;
@@ -41,5 +42,13 @@ public class ResponseMessage<T> {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public boolean isSuccess() {
+        return success;
+    }
+
+    public void setSuccess(boolean success) {
+        this.success = success;
     }
 }

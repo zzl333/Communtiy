@@ -1,9 +1,8 @@
 package com.lixiangshequ.repository.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.lixiangshequ.entity.base.BaseUserInfo;
-import com.lixiangshequ.repository.base.BaseUserInfoMapper;
 
-public interface UserInfoMapper extends BaseUserInfoMapper {
+public interface UserInfoMapper extends BaseMapper<BaseUserInfo> {
 
-    BaseUserInfo selectByUid(Integer uid);
 }

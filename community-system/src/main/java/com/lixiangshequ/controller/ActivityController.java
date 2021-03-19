@@ -9,10 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 @Controller
 @RequestMapping("activity")
-public class ActivityController {
+public class ActivityController extends BaseController<BaseActivity> {
 
     @Autowired
     ActivityService activityService;
@@ -20,6 +21,16 @@ public class ActivityController {
     @RequestMapping("find")
     @ResponseBody
     public PageResponse<BaseActivity> find(HttpServletRequest request) {
+        logger.info("find all activity");
         return  activityService.find(request.getSession());
     }
+
+    @RequestMapping("findbyCondition")
+    @ResponseBody
+    public PageResponse<BaseActivity> findbyCondition(HttpServletRequest request, Map<String, Object> map) {
+        logger.info("find activity by condition");
+        return activityService.findByCondition(request.getSession(), map);
+    }
+
+
 }
