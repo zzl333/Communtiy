@@ -25,10 +25,10 @@ spring:
       enabled: true
 
 mybatis-plus:
-    mapper-locations: classpath:mapper/*.xml
-    typeAliasesPackage: com.lixiangshequ.entity.base
-    configuration:
-      log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath:mapper/*.xml
+  typeAliasesPackage: com.lixiangshequ.entity.base
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 spring.output.ansi.enabled: always
 

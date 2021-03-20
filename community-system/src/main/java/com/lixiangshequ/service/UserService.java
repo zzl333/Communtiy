@@ -87,4 +87,16 @@ public class UserService extends BaseService {
         if (baseUser == null || baseUser.getRole() != 1) return false;
         return true;
     }
+
+    /**
+     * 是否为登录状态
+     *
+     * @author 张祥麟
+     * @Date 2021/3/19
+     * @Version 1.0
+     */
+    public boolean isLogin(HttpSession session) {
+        if (session.getAttribute("user") == null) return false;
+        return true;
+    }
 }

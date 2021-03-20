@@ -31,5 +31,11 @@ public class UserController extends BaseController<BaseUser>{
         return res.getUrl();
     }
 
+    @RequestMapping("/logout")
+    public String logout(HttpServletRequest request) {
+        logger.info("/user/logout");
+        request.getSession().removeAttribute("user");
+        return "/login";
+    }
 
 }

@@ -9,7 +9,8 @@ public class ResponseMessage<T> {
     public ResponseMessage() {
     }
 
-    public ResponseMessage(String msg, T data, String url) {
+    public ResponseMessage(boolean success, String msg, T data, String url) {
+        this.success = success;
         this.msg = msg;
         this.data = data;
         this.url = url;

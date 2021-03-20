@@ -12,7 +12,7 @@ import java.util.List;
  * }
  */
 public class PageResponse<T> {
-    private Integer code;
+    private Integer code;   //0成功  1不成功
     private String msg;
     private Integer count;
     private List<T> data;

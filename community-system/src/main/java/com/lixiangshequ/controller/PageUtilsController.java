@@ -40,4 +40,10 @@ public class PageUtilsController extends BaseController{
         return "/admin/activityManager";
     }
 
+    @RequestMapping("/addDialog")
+    public String addDialog() {
+        return "/admin/addDialog";
+    }
+
+
 }
