@@ -1,0 +1,82 @@
+<div id="dialog">
+    <form class="layui-form">
+        <div class="layui-form-item">
+            <label class="layui-form-label">活动标题</label>
+            <div class="layui-input-block">
+                <input type="text" name="titile" placeholder="请输入" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">活动地址</label>
+            <div class="layui-input-block">
+                <input type="text" name="" placeholder="请输入" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">组织者</label>
+            <div class="layui-input-block">
+                <input type="text" name="organizer" placeholder="请输入" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">活动类型</label>
+            <div class="layui-input-block">
+                <select name="city" lay-verify="required" id="selector">
+                    <option value=""></option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">开始时间</label>
+            <div class="layui-input-block">
+                <input type="text" name="beginTime" placeholder="请输入" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">结束时间</label>
+            <div class="layui-input-block">
+                <input type="text" name="endTime" placeholder="请输入" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">活动描述</label>
+            <div class="layui-input-block">
+                <textarea placeholder="请输入内容" class="layui-textarea" name="info"></textarea>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit lay-filter="*">立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+    </form>
+
+</div>
+
+<script>
+    layui.use('form', function () {
+        var form = layui.form;
+        loadConfig(form);
+    })
+
+    function loadConfig(form) {
+        $.ajax({
+            type: "GET",
+            //type=1为活动字典
+            url: "/config/find/1",
+            success: function (data) {
+                if (data.code == 0) {
+                    data.data.forEach(function (data) {
+                        console.log(data);
+                        $("#selector").append("<option value=\"" + data.code + "\">" + data.codedes + "</option>");
+                        form.render();
+                    })
+                } else {
+                    window.location.href = location.host + "/user/login";
+                }
+            }
+        });
+    }
+</script>
