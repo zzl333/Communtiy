@@ -1,6 +1,7 @@
 package com.lixiangshequ.controller;
 
 import com.lixiangshequ.config.PageResponse;
+import com.lixiangshequ.config.ResponseMessage;
 import com.lixiangshequ.entity.base.BaseActivity;
 import com.lixiangshequ.service.ActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,12 @@ public class ActivityController extends BaseController<BaseActivity> {
     public PageResponse<BaseActivity> findbyCondition(HttpServletRequest request, Map<String, Object> map) {
         logger.info("find activity by condition");
         return activityService.findByCondition(request.getSession(), map);
+    }
+
+    @RequestMapping("/add")
+    @ResponseBody
+    public ResponseMessage<BaseActivity> add(BaseActivity activity, HttpServletRequest request) {
+        return activityService.add(activity, request.getSession());
     }
 
 

@@ -99,4 +99,17 @@ public class UserService extends BaseService {
         if (session.getAttribute("user") == null) return false;
         return true;
     }
+
+
+    /**
+     * 获取用户session
+     *
+     * @Author 张祥麟
+     * @Date 2021/3/24
+     * @Param
+     * @Return
+     */
+    public BaseUserInfo getUserInfo(HttpSession session) {
+        return (BaseUserInfo) session.getAttribute("user");
+    }
 }

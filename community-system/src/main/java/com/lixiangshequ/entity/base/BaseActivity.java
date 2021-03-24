@@ -8,7 +8,7 @@ import java.util.Date;
 public class BaseActivity {
     private Integer id;
 
-    private String titile;
+    private String title;
 
     private String info;
 
@@ -39,11 +39,11 @@ public class BaseActivity {
     }
 
     public String getTitile() {
-        return titile;
+        return title;
     }
 
     public void setTitile(String titile) {
-        this.titile = titile == null ? null : titile.trim();
+        this.title = titile == null ? null : titile.trim();
     }
 
     public String getInfo() {
@@ -100,6 +100,14 @@ public class BaseActivity {
 
     public void setType(Integer type) {
         this.type = type;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public Date getBegintime() {

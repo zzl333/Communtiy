@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -122,6 +123,38 @@ public class ActivityService extends BaseService<BaseActivity> {
 
         return true;
 
+    }
+
+    /**
+     * 添加活动
+     *
+     * @Author 张祥麟
+     * @Date 2021/3/21
+     * @Param
+     * @Return
+     */
+    public ResponseMessage<BaseActivity> add(BaseActivity activity, HttpSession session) {
+        ResponseMessage<BaseActivity> res = new ResponseMessage<>();
+        if (!userService.isAdmin(session)) {
+            res.setSuccess(false);
+            res.setMsg("添加失败请检查数据");
+            return res;
+        }
+
+        activity.setCreateby(userService.getUserInfo(session).getName());
+        activity.setCreated(new Date());
+
+
+        if (activityMapper.insert(activity) == 0) {
+            res.setSuccess(false);
+            res.setMsg("添加失败请检查数据");
+            return res;
+        }
+
+        res.setSuccess(true);
+        res.setUrl("/admin/activityManager");
+        res.setMsg("添加成功");
+        return res;
     }
 
 }

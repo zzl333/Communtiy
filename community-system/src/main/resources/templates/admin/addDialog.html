@@ -1,5 +1,5 @@
 <div id="dialog">
-    <form class="layui-form">
+    <form class="layui-form" method="post" action="/activity/add">
         <div class="layui-form-item">
             <label class="layui-form-label">活动标题</label>
             <div class="layui-input-block">
@@ -9,7 +9,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">活动地址</label>
             <div class="layui-input-block">
-                <input type="text" name="" placeholder="请输入" autocomplete="off" class="layui-input">
+                <input type="text" name="address" placeholder="请输入" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
@@ -21,7 +21,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">活动类型</label>
             <div class="layui-input-block">
-                <select name="city" lay-verify="required" id="selector">
+                <select name="type" lay-verify="required" id="selector">
                     <option value=""></option>
                 </select>
             </div>
@@ -29,13 +29,14 @@
         <div class="layui-form-item">
             <label class="layui-form-label">开始时间</label>
             <div class="layui-input-block">
-                <input type="text" name="beginTime" placeholder="请输入" autocomplete="off" class="layui-input">
+                <input type="text" name="begintime" placeholder="请输入" autocomplete="off" class="layui-input"
+                       id="beginTime">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">结束时间</label>
             <div class="layui-input-block">
-                <input type="text" name="endTime" placeholder="请输入" autocomplete="off" class="layui-input">
+                <input type="text" name="endtime" placeholder="请输入" autocomplete="off" class="layui-input" id="endTime">
             </div>
         </div>
 
@@ -56,9 +57,25 @@
 </div>
 
 <script>
-    layui.use('form', function () {
+    layui.use(['form', 'laydate'], function () {
         var form = layui.form;
+        var laydate = layui.laydate;
+        laydate.render({
+            elem: '#beginTime'
+            , type: 'datetime'
+        });
+        laydate.render({
+            elem: '#endTime'
+            , type: 'datetime'
+        });
         loadConfig(form);
+        form.on('submit(*)', function (data) {
+            if (data && data.success) {
+                window.location.href = location.host + data.url;
+            } else {
+                layui.msg(data.msg);
+            }
+        });
     })
 
     function loadConfig(form) {
