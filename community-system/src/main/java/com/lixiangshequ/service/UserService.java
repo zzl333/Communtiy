@@ -55,9 +55,9 @@ public class UserService extends BaseService {
         res.setSuccess(true);
         res.setMsg("登录成功");
         if (baseUser.getRole() == 2) {
-            res.setUrl("/admin/index");
+            res.setUrl("redirect:/page/admin/index");
         }else {
-            res.setUrl("/index");
+            res.setUrl("redirect:/page/index");
         }
 
         return res;

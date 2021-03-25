@@ -10,10 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class ActivityService extends BaseService<BaseActivity> {
@@ -137,23 +134,88 @@ public class ActivityService extends BaseService<BaseActivity> {
         ResponseMessage<BaseActivity> res = new ResponseMessage<>();
         if (!userService.isAdmin(session)) {
             res.setSuccess(false);
-            res.setMsg("添加失败请检查数据");
+            res.setMsg("您不是管理员，请先登录");
+            res.setUrl("redirect:/page/login");
             return res;
         }
 
-        activity.setCreateby(userService.getUserInfo(session).getName());
+        activity.setCreateBy(userService.getUserInfo(session).getName());
         activity.setCreated(new Date());
 
 
         if (activityMapper.insert(activity) == 0) {
             res.setSuccess(false);
             res.setMsg("添加失败请检查数据");
+            res.setMsg("redirect:/page/error");
             return res;
         }
 
         res.setSuccess(true);
-        res.setUrl("/admin/activityManager");
+        res.setUrl("redirect:/page/admin/index");
         res.setMsg("添加成功");
+        return res;
+    }
+
+    /**
+     * 根据id删除活动
+     *
+     * @Author 张祥麟
+     * @Date 2021/3/24
+     * @Param
+     * @Return
+     */
+    public ResponseMessage delete(HttpSession session, Integer id) {
+        ResponseMessage res = new ResponseMessage();
+        //登录权限校验
+        if (!userService.isAdmin(session)) {
+            res.setMsg("请先登录");
+            res.setSuccess(false);
+            res.setUrl("redirect:/page/login");
+            return res;
+        }
+        BaseActivity baseActivity = activityMapper.selectById(id);
+        if (baseActivity == null) {
+            res.setMsg("删除的数据不存在，请刷新");
+            res.setSuccess(false);
+            res.setUrl("redirect:/page/admin/index");
+            return res;
+        }
+        //[TODO]并发情况下会出现重复删除和删除失误的情况，建议使用乐观锁
+        activityMapper.deleteById(id);
+
+        res.setUrl("redirect:/page/admin/index");
+        res.setSuccess(true);
+        res.setMsg("删除成功");
+        return res;
+    }
+
+    /**
+     * 批量删除活动
+     *
+     * @author 张祥麟
+     * @Date 2021/3/24
+     * @Version 1.0
+     */
+    public ResponseMessage deleteBatch(HttpSession session, Integer[] ids) {
+        ResponseMessage res = new ResponseMessage();
+        //登录权限校验
+        if (!userService.isAdmin(session)) {
+            res.setMsg("请先登录");
+            res.setSuccess(false);
+            res.setUrl("redirect:/page/login");
+        }
+        //[TODO] 使用Collections.addAll构造list，不要使用Arrays.asList(),产生的是Array内部类很多方法并不能用
+        List<Integer> idsList = new ArrayList<>();
+        Collections.addAll(idsList, ids);
+        if (ids.length != activityMapper.deleteBatchIds(idsList)) {
+            res.setMsg("部分数据删除失败");
+            res.setSuccess(false);
+        } else {
+            res.setSuccess(true);
+            res.setMsg("删除成功");
+        }
+
+        res.setUrl("/admin/index");
         return res;
     }
 

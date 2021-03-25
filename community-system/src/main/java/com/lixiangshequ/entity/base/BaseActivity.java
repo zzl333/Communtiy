@@ -1,136 +1,49 @@
 package com.lixiangshequ.entity.base;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
 
 import java.util.Date;
 
 @TableName("activity")
+@Data
 public class BaseActivity {
+    @TableId(type = IdType.AUTO)
     private Integer id;
 
+    @TableField("title")
     private String title;
 
+    @TableField("info")
     private String info;
 
+    @TableField("address")
     private String address;
 
+    @TableField("images")
     private String images;
 
-    private String createby;
+    @TableField("createBy")
+    private String createBy;
 
+    @TableField("organizer")
     private String organizer;
 
+    @TableField("created")
     private Date created;
 
+    @TableField("type")
     private Integer type;
 
-    private Date begintime;
+    @TableField("beginTime")
+    private Date beginTime;
 
-    private Date endtime;
+    @TableField("endTime")
+    private Date endTime;
 
+    @TableField("hot")
     private Integer hot;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getTitile() {
-        return title;
-    }
-
-    public void setTitile(String titile) {
-        this.title = titile == null ? null : titile.trim();
-    }
-
-    public String getInfo() {
-        return info;
-    }
-
-    public void setInfo(String info) {
-        this.info = info == null ? null : info.trim();
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address == null ? null : address.trim();
-    }
-
-    public String getImages() {
-        return images;
-    }
-
-    public void setImages(String images) {
-        this.images = images == null ? null : images.trim();
-    }
-
-    public String getCreateby() {
-        return createby;
-    }
-
-    public void setCreateby(String createby) {
-        this.createby = createby == null ? null : createby.trim();
-    }
-
-    public String getOrganizer() {
-        return organizer;
-    }
-
-    public void setOrganizer(String organizer) {
-        this.organizer = organizer == null ? null : organizer.trim();
-    }
-
-    public Date getCreated() {
-        return created;
-    }
-
-    public void setCreated(Date created) {
-        this.created = created;
-    }
-
-    public Integer getType() {
-        return type;
-    }
-
-    public void setType(Integer type) {
-        this.type = type;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public Date getBegintime() {
-        return begintime;
-    }
-
-    public void setBegintime(Date begintime) {
-        this.begintime = begintime;
-    }
-
-    public Date getEndtime() {
-        return endtime;
-    }
-
-    public void setEndtime(Date endtime) {
-        this.endtime = endtime;
-    }
-
-    public Integer getHot() {
-        return hot;
-    }
-
-    public void setHot(Integer hot) {
-        this.hot = hot;
-    }
 }

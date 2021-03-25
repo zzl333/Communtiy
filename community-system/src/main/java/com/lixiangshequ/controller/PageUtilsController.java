@@ -1,15 +1,24 @@
 package com.lixiangshequ.controller;
 
-import org.springframework.http.HttpRequest;
+import com.lixiangshequ.entity.base.BaseUserInfo;
+import com.lixiangshequ.service.ActivityService;
+import com.lixiangshequ.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
-import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping("/page")
 public class PageUtilsController extends BaseController{
+
+    @Autowired
+    UserService userService;
+
+    @Autowired
+    ActivityService activityService;
+
     @RequestMapping("/top")
     public String getTop() {
         return "/top";
@@ -45,5 +54,21 @@ public class PageUtilsController extends BaseController{
         return "/admin/addDialog";
     }
 
+    @RequestMapping("/editDialog")
+    public String editDialog() {
+        return "/admin/editDialog";
+    }
 
+    @RequestMapping("/admin/index")
+    public String adminIndex(HttpServletRequest request) {
+        BaseUserInfo userInfo = userService.getUserInfo(request.getSession());
+        if (userInfo != null)
+            request.setAttribute("user", userInfo);
+        return "/admin/index";
+    }
+
+    @RequestMapping("/error")
+    public String error() {
+        return "/error";
+    }
 }

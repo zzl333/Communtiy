@@ -11,7 +11,7 @@
 </head>
 
 <body>
-<div class="layui-container" style="overflow: visible">
+<div class="layui-container">
 <!--    导航栏-->
     <ul class="layui-nav" id="top" xmlns:th="http://www.thymeleaf.org">
         <li class="layui-nav-item layui-this">
@@ -24,7 +24,7 @@
             <a href="">字典管理</span></a>
         </li>
         <ul class="layui-nav layui-layout-right">
-            <li class="layui-nav-item" aria-level="rigth" th:if="${user!=null}" overflow="visible">
+            <li class="layui-nav-item" aria-level="rigth" th:if="${user!=null}">
                 <a href="#"><img src="#" class="layui-nav-img">[[${user.name}]]</a>
                 <dl class="layui-nav-child" overflow="visible">
                     <dd><a href="#">个人信息</a></dd>
@@ -38,7 +38,7 @@
     </ul>
 
 <!--    活动管理div-->
-    <div id="activity-manager">
+    <div id="tempDiv" style="position:relative;z-index:0">
     </div>
 
 <!--    用户管理div-->
@@ -55,11 +55,9 @@
         var element = layui.element;
     });
     $(function () {
-        $("#activity-manager").load("/page/activityManager");
+        $("#tempDiv").load("/page/activityManager");
     });
-    function activityManager() {
-        $("#activity-manager").load("/page/activityManager");
-    };
+
 
 </script>
 </html>

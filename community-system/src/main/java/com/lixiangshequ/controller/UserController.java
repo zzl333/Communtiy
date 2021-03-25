@@ -24,7 +24,6 @@ public class UserController extends BaseController<BaseUser>{
         //放入Session
         if (res.getData() != null) {
             request.getSession().setAttribute("user", res.getData());
-            request.setAttribute("user", res.getData());
         }else {
             request.setAttribute("msg", res.getMsg());
         }
