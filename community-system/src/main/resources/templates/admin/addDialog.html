@@ -1,4 +1,4 @@
-<div id="dialog" xmlns:th="http://www.thymeleaf.org">
+<div id="dialog">
     <form class="layui-form" method="post" action="/activity/add">
         <div class="layui-form-item">
             <label class="layui-form-label">活动标题</label>
@@ -67,7 +67,6 @@
         laydate.render({
             elem: '#beginTime'
             , type: 'datetime'
-            , default
         });
         laydate.render({
             elem: '#endTime'

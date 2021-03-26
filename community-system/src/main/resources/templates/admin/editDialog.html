@@ -1,5 +1,8 @@
 <div id="dialog">
     <form class="layui-form" method="post" action="/activity/add">
+        <input name="id" id="id" type="hidden" style="display: none"><input>
+        <input name="creatBy" id="creatBy" type="hidden" style="display: none"><input>
+        <input name="created" id="created" type="hidden" style="display: none"><input>
         <div class="layui-form-item">
             <label class="layui-form-label">活动标题</label>
             <div class="layui-input-block">
@@ -53,7 +56,6 @@
         <div class="layui-form-item">
             <div class="layui-input-block">
                 <button class="layui-btn" lay-submit lay-filter="submit">立即提交</button>
-                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
             </div>
         </div>
     </form>
@@ -72,25 +74,19 @@
             elem: '#endTime'
             , type: 'datetime'
         });
-        loadConfig(form);
     })
 
     function loadConfig(form) {
-        $.ajax({
-            type: "GET",
-            //type=1为活动字典
-            url: "/config/find/1",
-            success: function (data) {
-                if (data.code == 0) {
-                    data.data.forEach(function (data) {
-                        console.log(data);
-                        $("#selector").append("<option value=\"" + data.code + "\">" + data.codedes + "</option>");
-                        form.render();
-                    })
-                } else {
-                    window.location.href = location.host + "/page/login";
-                }
+        $.get("/config/find/1", function (data, status) {
+            if (data.code == 0) {
+                data.data.forEach(function (data) {
+                    console.log(data);
+                    $("#selector").append("<option value=\"" + data.code + "\">" + data.codedes + "</option>");
+                })
+            } else {
+                window.location.href = location.host + "/page/login";
             }
-        });
+        })
     }
+
 </script>

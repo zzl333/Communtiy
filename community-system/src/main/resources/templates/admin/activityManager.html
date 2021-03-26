@@ -165,12 +165,13 @@
                     title: '添加活动'
                     , type: 1
                     , content: data
-                    , area: ['1000px', '600px']
+                    , area: ['1000px', '550px']
                 });
             }
         });
     }
 
+    //编辑框加载绑定
     function editActivity(activity) {
         $.ajax({
             type: "POST",
@@ -180,12 +181,36 @@
             data: activity,
             success: function (pageData) {
                 layer.open({
-                    title: '添加活动'
+                    title: '修改活动'
                     , type: 1
                     , content: pageData
-                    , area: ['1000px', '600px']
+                    , area: ['1000px', '550px']
                 });
+                reBackData(activity);
+
             }
+        });
+    }
+
+    //数据回显
+    function reBackData(activity) {
+        console.log(activity);
+        $("input[name='id']").val(activity.id);
+        $("input[name='title']").val(activity.title);
+        $("input[name='address']").val(activity.address);
+        $("input[name='organizer']").val(activity.organizer);
+        $("input[name='beginTime']").val(activity.beginTime);
+        $("input[name='endTime']").val(activity.endTime);
+        $("textarea[name='info']").val(activity.info);
+        $("input[name='hot']").val(activity.hot);
+        $("input[name='images']").val(activity.images);
+        $("input[name='creatBy']").val(activity.creatBy);
+        $("input[name='created']").val(activity.created);
+        layui.use('form', function () {
+            var form = layui.form;
+            loadConfig(form);
+            form.render();
+            $("#selector").val(activity.type);
         });
     }
 </script>
