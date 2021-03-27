@@ -71,4 +71,15 @@ public class PageUtilsController extends BaseController{
     public String error() {
         return "/error";
     }
+
+    @RequestMapping("/userManager")
+    public String userManager() {
+        return "/admin/userManager";
+    }
+
+    //'/page/changeUser'
+    @RequestMapping("/userManager")
+    public String changeUser() {
+        return "/admin/changeUser";
+    }
 }

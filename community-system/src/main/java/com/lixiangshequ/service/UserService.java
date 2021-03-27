@@ -1,6 +1,8 @@
 package com.lixiangshequ.service;
 
+import com.lixiangshequ.config.PageResponse;
 import com.lixiangshequ.config.ResponseMessage;
+import com.lixiangshequ.entity.UserVo;
 import com.lixiangshequ.entity.base.BaseUser;
 import com.lixiangshequ.entity.base.BaseUserInfo;
 import com.lixiangshequ.repository.mapper.UserInfoMapper;
@@ -111,5 +113,29 @@ public class UserService extends BaseService {
      */
     public BaseUserInfo getUserInfo(HttpSession session) {
         return (BaseUserInfo) session.getAttribute("user");
+    }
+
+    /**
+     * 管理员查询用户信息方法
+     *
+     * @Author 张祥麟
+     * @Date 2021/3/26
+     * @Param
+     * @Return
+     */
+    public PageResponse<UserVo> find(HttpSession session) {
+        PageResponse<UserVo> res = new PageResponse<>();
+        if (!isAdmin(session)) {
+            res.setCode(400);
+            res.setMsg("没有管理员权限");
+            res.setCount(0);
+            return res;
+        }
+        List<UserVo> data = userMapper.findUserVo();
+        res.setMsg("查询成功");
+        res.setCode(0);
+        res.setCount(data.size());
+        res.setData(data);
+        return res;
     }
 }

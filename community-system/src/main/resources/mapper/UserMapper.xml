@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.lixiangshequ.repository.mapper.UserMapper" >
+<mapper namespace="com.lixiangshequ.repository.mapper.UserMapper">
 
+    <!--    List<UserVo> findUserVo();-->
+    <select id="findUserVo" resultType="com.lixiangshequ.entity.UserVo">
+        SELECT USER
+            .`code`,
+            USER.role,
+            USER.id,
+            user_info.`name`,
+            user_info.sex,
+            user_info.age,
+            user_info.`code` mCode,
+            user_info.mobile,
+            user_info.address,
+            user_info.head
+        FROM
+            `user`
+            LEFT JOIN
+                user_info
+            ON
+                USER.id = user_info.uid
+    </select>
 
 </mapper>

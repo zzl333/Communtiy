@@ -14,11 +14,14 @@
 <div class="layui-container">
 <!--    导航栏-->
     <ul class="layui-nav" id="top" xmlns:th="http://www.thymeleaf.org">
-        <li class="layui-nav-item layui-this">
+        <li class="layui-nav-item">
             <a href="javascript:activityManager()">活动管理</span></a>
         </li>
         <li class="layui-nav-item">
-            <a href="">用户管理</span></a>
+            <a href="javascript:userManager()">用户管理</span></a>
+        </li>
+        <li class="layui-nav-item">
+            <a href="">用户活动管理</span></a>
         </li>
         <li class="layui-nav-item">
             <a href="">字典管理</span></a>
@@ -58,6 +61,13 @@
         $("#tempDiv").load("/page/activityManager");
     });
 
+    function userManager() {
+        $("#tempDiv").load("/page/userManager");
+    }
+
+    function activityManager() {
+        $("#tempDiv").load("/page/activityManager");
+    }
 
 </script>
 </html>

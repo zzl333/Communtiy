@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <title>layui在线调试</title>
+    <title>用户管理界面</title>
 
     <style>
         body {
@@ -23,8 +23,8 @@
 
 <script type="text/html" id="barDemo">
     <!--    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>-->
-    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+    <a class="layui-btn layui-btn-xs" lay-event="edit">修改密码</a>
+    <!--    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除用户</a>-->
 </script>
 
 
@@ -42,33 +42,32 @@
 
         $.ajax({
             type: "GET",
-            url: '/activity/find',
+            url: '/user/find',
             dataType: "json",
             success: function (data) {
                 if (data && data.data) {
                     var option = {
                         elem: '#demo'
-                        , title: "活动表"
-                        , toolbar: 'default'
+                        , title: "用户表"
                         , height: 530
                         , title: '用户表'
+                        , toolbar: 'default'
                         , page: true //开启分页
                         , limit: 10
                         , data: data.data
                         , cols: [
                             [ //表头
                                 {type: 'checkbox', fixed: 'left', width: 80}
-                                , {field: 'id', title: '活动ID', width: 80, sort: true}
-                                , {field: 'title', title: '活动标题', width: 80}
-                                , {field: 'info', title: '活动描述', width: 90}
-                                , {field: 'address', title: '活动地点', width: 80}
-                                , {field: 'createBy', title: '创建人', width: 80}
-                                , {field: 'organizer', title: '组织者', width: 150}
-                                , {field: 'created', title: '创建时间', width: 200, sort: true}
-                                , {field: 'type', title: '活动类型', width: 100, sort: true}
-                                , {field: 'beginTime', title: '开始时间', width: 135, sort: true}
-                                , {field: 'endTime', title: '结束时间', width: 135, sort: true}
-                                , {field: 'hot', title: '热度', width: 135, sort: true}
+                                , {field: 'id', title: '用户ID', width: 90, sort: true}
+                                , {field: 'code', title: '登录账号', width: 100}
+                                , {field: 'name', title: '姓名', width: 90}
+                                , {field: 'sex', title: '性别', width: 80}
+                                , {field: 'age', title: '年龄', width: 80}
+                                , {field: 'role', title: '角色', width: 80}
+                                , {field: 'mCode', title: '党员编号', width: 150}
+                                , {field: 'mobile', title: '电话号码', width: 200, sort: true}
+                                , {field: 'address', title: '住址', width: 200, sort: true}
+                                , {field: 'head', title: '头像', width: 200, sort: true}
                                 , {fixed: 'right', width: 165, align: 'center', toolbar: '#barDemo'}
                             ]
                         ]
@@ -149,13 +148,13 @@
                     })
                 });
             } else if (layEvent === 'edit') {
-                editActivity(data[0]);
+                changeUser(data);
             }
         });
     });
 
     //添加活动
-    function addActivity() {
+    function addUser() {
         $.ajax({
             type: "GET",
             url: '/page/addDialog',
@@ -171,29 +170,27 @@
         });
     }
 
-    //编辑框加载绑定
-    function editActivity(activity) {
+    function changeUser(user) {
         $.ajax({
             type: "POST",
-            url: '/page/editDialog',
+            url: '/page/changeUser',
             dataType: "html",
             contentType: "application/json; charset=utf-8",
             data: activity,
             success: function (pageData) {
                 layer.open({
-                    title: '修改活动'
+                    title: '修改密码'
                     , type: 1
                     , content: pageData
                     , area: ['1000px', '550px']
                 });
-                reBackData(activity);
+                reBackData(user);
 
             }
         });
     }
 
-    //数据回显
-    function reBackData(activity) {
+    function reBackData(user) {
         console.log(activity);
         $("input[name='id']").val(activity.id);
         $("input[name='title']").val(activity.title);
